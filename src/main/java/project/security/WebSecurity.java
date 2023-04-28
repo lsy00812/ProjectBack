@@ -50,7 +50,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //			.and().addFilter(getAuthenticationFilter());
 		
 		http.authorizeRequests()
-			.antMatchers("/login", "/api/regist", "/error", "/api/something/mainpage", "/api/getImage/**").permitAll() //로그인 없이 허용할 주소 설정.
+			.antMatchers("/login", "/api/login/google", "/api/regist", "/error", "/api/something/mainpage", "/api/getImage/**").permitAll() //로그인 없이 허용할 주소 설정.
 //			.antMatchers("**").permitAll()
 			.anyRequest().authenticated()
 			.and().addFilter(getAuthenticationFilter())
