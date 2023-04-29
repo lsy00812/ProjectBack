@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProjectMapper {
 
+
 //	// 1. 개인 일기 목록 조회
 //	 List<DiaryDto> selectPrivateList(String memberId) throws Exception;
 //	 

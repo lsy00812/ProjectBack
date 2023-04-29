@@ -27,13 +27,17 @@ public class LoginServiceImpl implements LoginService {
 		return loginMapper.login(userDto);
 	}
 	
+	//UserDetailsService 인터페이스의 메소드
+	//username은 고유값인 userId를 가지고 확인
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserDto userDto = loginMapper.selectUserByUserId(username);
+		//가져온 userDto내용이 없다면, 에러발생
 		if ( userDto == null ) {
 			throw new UsernameNotFoundException(username);
 		}
-		
+		//있다면, 유저의 Id와 Pw를 기준으로 User객체 생성
+		//User객체는 UserDetails 인터페이스를 상속.
 		return new User(userDto.getUserId(), userDto.getUserPw(),
 				true, true, true, true, new ArrayList<>());
 	}
