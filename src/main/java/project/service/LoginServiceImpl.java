@@ -1,6 +1,7 @@
 package project.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -9,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import project.dto.LoginDto;
+import project.dto.GoogleDto;
 import project.dto.UserDto;
 import project.mapper.LoginMapper;
 
@@ -22,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@Override
+	@Override	//"/login" 내장
 	public UserDto login(UserDto userDto) throws Exception{
 		return loginMapper.login(userDto);
 	}
@@ -51,6 +52,13 @@ public class LoginServiceImpl implements LoginService {
 	public int registUser(UserDto userDto) throws Exception {
 		userDto.setUserPw(passwordEncoder.encode(userDto.getUserPw()));
 		return loginMapper.registUser(userDto);
+	}
+	
+	@Override
+	public List<UserDto> googlelogin(GoogleDto googleDto) throws Exception{
+		String username = googleDto.getEmail();
+		return loginMapper.googlelogin(username);
+		
 	}
 
 }
