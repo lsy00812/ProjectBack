@@ -12,7 +12,7 @@ public class WebChatConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("ws-stomp")	//stomp 접속 Url -> /ws-stomp
+		registry.addEndpoint("/ws")	//stomp 접속 Url -> /ws
 		.setAllowedOriginPatterns("*")		//브라우저에서 교차 출처 요청이 허용되는 출처를 패턴으로 설정
 		.withSockJS(); 						//SockJs를 사용해서 WebSocket을 지원하지 않는 브라우저는 대체 프로토콜 사용
 	}
@@ -21,9 +21,9 @@ public class WebChatConfig implements WebSocketMessageBrokerConfigurer {
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 	
 		//메시지 구독하는 요청 url -> 메시지 받을 때	//"/Topic" 이라는 주소 많이 쓰는 듯
-		registry.enableSimpleBroker("/sub");			//구독(감사님은 /topic)
+		registry.enableSimpleBroker("/topic");			//구독(감사님은 /topic)
 		
 		//메시지 발행하는 요청 url -> 메시지 보낼 때(강사님은 /app)
-		registry.setApplicationDestinationPrefixes("/pub");
+		registry.setApplicationDestinationPrefixes("/app");
 	}
 }

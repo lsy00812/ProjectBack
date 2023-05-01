@@ -2,13 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.mapper.ChatMapper">
+<<<<<<< HEAD
 	
 	<!-- 전체 채팅방 조회 -->
 	<select id="selectRoomListByUser" parameterType="project.dto.UserDto" resultType="project.dto.AccompanyChatroomDto">
 		select user_id, 
 			from user
 		where user_id = #{userId}
+=======
+
+	<!-- 동행글Idx로 채팅방ID 조회 -->
+	<select id="selectChatroomByAccompanyId" parameterType="int" resultType="String">
+		select chatroom_id
+			from chatroom
+			where accompany_idx = #{accompanyIdx}
+	</select> 
+	
+	<!-- 동행 채팅방 생성 -->
+	<insert id="insertChatroom" parameterType="project.dto.ChatroomDto">
+		insert into chatroom ( chatroom_id, accompany_idx )
+		values ( #{chatroomId}, #{accompanyIdx})
+	</insert>
+	
+	<!-- userId 기준으로 채팅방 조회 -->
+	<select id="selectChatroomByUserId" parameterType="String" resultType="project.dto.ChatroomUserDto">
+		select * 
+		from Chatroom_user 
+		where user_id = #{userId};
+	
+>>>>>>> 18ba36458e63750d11f0a2da7c5ae58bf6067faa
 	</select>
-	 
+	
+	
+	<!-- [[ 글로벌 채팅 ]] -->
+	<!-- 글로벌 채팅 내용 조회 -->
+	<select id="selectMessage" parameterType="int" resultType="project.dto.ChatDto">
+		select * from ( select * from chat where chatroom_id is null order by created_dt desc limit ${num})
+		  a order by a.created_dt
+	</select>
+
+	<!-- 글로벌 채팅 내용 입력 -->
+	<insert id="insertMessage" parameterType="project.dto.ChatDto">
+		insert into chat (type, message, user_id, created_dt)
+		values (#{type}, #{message}, #{userId}, #{createdDt})
+	</insert>
+	
+	
+	<!-- [[ 동행 채팅 ]] -->
+	<!-- 동행 채팅 내용 조회 -->
+	<select id="selectMessageChatroom" parameterType="String" resultType="project.dto.ChatDto">
+		select * from ( select * from chat order by created_dt desc )
+		  a where chatroom_id = #{ chatroomId } order by a.created_dt
+	</select>
+	
+	<!-- 동행 채팅 내용 입력 -->
+	<insert id="insertMessageChatroom" parameterType="project.dto.ChatDto">
+		insert into chat (type, message, user_id, created_dt, chatroom_id)
+		values (#{type}, #{message}, #{userId}, #{createdDt}, #{chatroomId})
+	</insert>
 	 
 </mapper>
