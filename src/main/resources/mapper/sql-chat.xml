@@ -4,25 +4,8 @@
 <mapper namespace="project.mapper.ChatMapper">
 	
 	<!-- 전체 채팅방 조회 -->
-	<select id="login" parameterType="project.dto.UserDto" resultType="project.dto.UserDto">
-		select user_id, user_name, user_nickname, user_pw
-		  from user
-		 where user_id = #{userId} and user_pw = #{userPw}
-	</select>
-
-	<select id="selectUserByUserId" parameterType="String" resultType="project.dto.UserDto">
-		select user_id, user_pw, user_name, user_nickname 
-		  from user
-		 where user_id = #{userId}
-	</select>
-	
-	<insert id="registUser" parameterType="project.dto.UserDto">
-		insert into user (user_id, user_pw, user_name, user_nickname, country_idx)
-		values (#{userId}, #{userPw}, #{userName}, #{userNickname}, #{countryIdx})
-	</insert>
-	
-	<select id="googlelogin" parameterType="String" resultType="project.dto.UserDto">
-		select user_id
+	<select id="selectRoomListByUser" parameterType="project.dto.UserDto" resultType="project.dto.AccompanyChatroomDto">
+		select user_id, 
 			from user
 		where user_id = #{userId}
 	</select>
