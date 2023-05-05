@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import project.dto.ChatDto;
 import project.dto.ChatroomDto;
+import project.dto.ChatroomUserDto;
 import project.mapper.ChatMapper;
 
 @Service
@@ -34,6 +35,29 @@ public class ChatService {
 	public List<ChatroomDto> selectChatroomByUserId(String userId) throws Exception{
 		return mapper.selectChatroomByUserId(userId);
 	}
+	
+	//채팅방별 유저아이디 ByChatroomId
+	public List<ChatroomUserDto> selectUserIdByChatroomId(String chatroomId) throws Exception{
+		return mapper.selectUserIdByChatroomId(chatroomId);
+	}
+	
+	//조회 By 채팅방ID와 유저ID
+	public List<ChatroomUserDto> selectListByChatroomIdAndUserId(ChatroomUserDto chatroomUserDto) throws Exception{
+		return mapper.selectListByChatroomIdAndUserId(chatroomUserDto);
+	}
+	
+	//채팅방_유저 테이블에 유저아이디, 채팅방ID 추가
+	public void insertUserIdToChatroomUser(ChatroomUserDto chatroomUserDto) throws Exception{
+		mapper.insertUserIdToChatroomUser(chatroomUserDto);
+	}
+	
+	public String selectLeaveTime(ChatDto chatDto) throws Exception{
+		return mapper.selectLeaveTime(chatDto);
+	}
+	
+	public void deleteChatroom(ChatroomUserDto chatroomUserDto) throws Exception{
+	}
+	
 	
 	//1. 글로벌 채팅 메시지 조회/입력
 	//채팅방 입장시 출력되는 이전 채팅내역 개수

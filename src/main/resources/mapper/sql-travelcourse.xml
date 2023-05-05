@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.mapper.TravelcourseMapper">
+
+	<select id="selectCourseList" resultType="project.dto.TravelcourseDto">
+		select travelcourse_idx, travelcourse_contents, travelcourse_title,
+		travelcourse_cnt, user_id, travelcourse_deleted,
+		date_format(travelcourse_createdtime, '%Y-%m-%d %H:%i:%s') as travelcourse_createdtime
+		from travelcourse
+		where travelcourse_deleted = 'N'
+		order by travelcourse_idx desc
+	</select>
+
+	<select id="selectCourseDetail" parameterType="int" resultType="project.dto.TravelcourseDto">
+		select * from travelcourse
+		where travelcourse_idx = #{travelcourseIdx}
+	
+	</select>
+
+	<insert id="insertCourse" parameterType="project.dto.TravelcourseDto">
+		insert into travelcourse (travelcourse_title,
+		travelcourse_contents, travelcourse_createdtime, user_id)
+		values (
+		#{travelcourseTitle}, #{travelcourseContents}, now(), 'admin' )
+
+	</insert>
+
+	<update id="updateHitCount" parameterType="int">
+		update travelcourse
+		set travelcourse_cnt = travelcourse_cnt + 1
+		where travelcourse_idx = #{travelcourseIdx}
+	</update>
+
+	<update id="updateCourse" parameterType="project.dto.TravelcourseDto">
+		update travelcourse
+		set travelcourse_title = #{travelcourseTitle},
+		travelcourse_contents = #{travelcourseContents},
+		travelcourse_createdtime = now(),
+		user_id = 'admin'
+		where travelcourse_idx = #{travelcourseIdx}
+	</update>
+	
+	<delete id="deleteCourse" parameterType="int">
+		update travelcourse
+		set travelcourse_deleted = "Y",
+		user_id = 'admin'
+		where travelcourse_idx = #{travelcourseIdx}
+	</delete>
+</mapper>

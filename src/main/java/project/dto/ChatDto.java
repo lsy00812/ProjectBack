@@ -10,7 +10,6 @@ public class ChatDto {
 		JOIN, CHAT, LEAVE
 	}
 	
-	
 	private MessageType type;
 	private int chatIdx;	//chatIdx
 	private String message;	//message

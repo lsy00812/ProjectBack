@@ -7,5 +7,5 @@ public class KoreapriceDto {
 	//물가체험
 	int koreapriceIdx;			//한국물가상품인덱스
 	String koreapriceProduct;	//상품명
-	int koreapricePrice;		//상품가격
+	double koreapricePrice;		//상품가격
 }
