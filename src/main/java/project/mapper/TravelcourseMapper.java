@@ -18,4 +18,6 @@ public interface TravelcourseMapper {
 	int updateCourse(TravelcourseDto travelcourseDto) throws Exception;
 
 	int deleteCourse(int travelcourseIdx) throws Exception;
+	
+	List<TravelcourseDto> getTravelcourseUserId(String userId) throws Exception;
 }

@@ -35,7 +35,7 @@ public class RestLoginApiController {
 	//구글 로그인 시 처리
 	//axios 날라옴 만약 회원정보가 있다면 1 응답
 	//회원정보가 없다면 0 응답.
-	//프론트에서 1로 받았다면, 다시 login처리하면 됨( 소셜로그인용 임시 비번 사용)
+	//프론트에서 1로 받았다면, 다시 lo	gin처리하면 됨( 소셜로그인용 임시 비번 사용)
 	//0으로 받았다면, "/api/regist/google"로 추가 정보 입력(국가정보, 닉네임)
 	@PostMapping("/api/login/google")
 	public ResponseEntity<Object> googlelogin(@RequestBody GoogleDto googleDto) throws Exception{
